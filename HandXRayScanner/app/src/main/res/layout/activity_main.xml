@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#050A0E">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/viewFinder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- ডিজিটাল এক্স-রে ফিল্টার ওভারলে -->
+    <View
+        android:id="@+id/xrayOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7700E5FF"
+        android:visibility="gone" />
+
+    <!-- লেজার স্ক্যান লাইন -->
+    <View
+        android:id="@+id/scanLine"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#00FFFF"
+        android:visibility="gone" />
+
+    <!-- এআই স্ট্যাটাস বক্স -->
+    <LinearLayout
+        android:id="@+id/guideBox"
+        android:layout_width="300dp"
+        android:layout_height="380dp"
+        android:layout_centerInParent="true"
+        android:background="@android:drawable/dialog_holo_dark_frame"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#B3000000"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="ক্যামেরার সামনে হাত ধরুন (AI খুঁজছে...)"
+            android:textAlignment="center"
+            android:textColor="#FF5252"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- হাত শনাক্ত হলেই কেবল এই বাটনটি সক্রিয় হবে -->
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="#555555"
+        android:enabled="false"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="14dp"
+        android:text="হাত শনাক্ত হয়নি"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- ফলাফল ও PhonePe পেমেন্ট প্যানেল -->
+    <ScrollView
+        android:id="@+id/resultLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F20A192F"
+        android:padding="20dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="AI হাতের রেখা বিশ্লেষণ রিপোর্ট"
+                android:textColor="#00FFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFreeResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#112240"
+                android:lineSpacingExtra="6dp"
+                android:padding="16dp"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/paymentLockBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#1D3557"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="বাকি ৮টি গোপন তথ্য লক করা আছে!"
+                    android:textColor="#FFD166"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="সম্পূর্ণ রিপোর্ট দেখতে PhonePe-তে ₹১০ পেমেন্ট করুন। বাটনে চাপলে UPI ID কপি হয়ে যাবে।"
+                    android:textColor="#E0E0E0"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnPayPhonePe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#5F259F"
+                    android:text="PhonePe দিয়ে ₹১০ পেমেন্ট করুন"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etTransactionId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="পেমেন্টের পর ১২ সংখ্যার UTR নম্বর দিন"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#AAAAAA"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnVerifyPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#06D6A0"
+                    android:text="পেমেন্ট নিশ্চিত করুন ও আনলক করুন"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvPaidResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#112240"
+                android:lineSpacingExtra="6dp"
+                android:padding="16dp"
+                android:textColor="#A8DADC"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnScanAgain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="আবার স্ক্যান করুন" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
