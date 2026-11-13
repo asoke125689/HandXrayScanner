@@ -123,8 +123,7 @@ class MainActivity : AppCompatActivity() {
         btnVerifyPayment = findViewById(R.id.btnVerifyPayment)
         btnScanAgain = findViewById(R.id.btnScanAgain)
 
-        btnPayPhonePe.text = "PhonePe দিয়ে ₹১০ পেমেন্ট করুন
-($MY_PHONEPE_UPI_ID)"
+        btnPayPhonePe.text = "PhonePe দিয়ে ₹১০ পেমেন্ট করুন ($MY_PHONEPE_UPI_ID)"
     }
 
     private fun setupHandLandmarkerAI() {
@@ -250,12 +249,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showResults() {
         currentShuffledList = allStatements.shuffled()
-        tvFreeResults.text = currentShuffledList.take(2).joinToString("
-
-")
-        tvPaidResults.text = currentShuffledList.drop(2).joinToString("
-
-")
+        val sep = System.lineSeparator() + System.lineSeparator()
+        tvFreeResults.text = currentShuffledList.take(2).joinToString(sep)
+        tvPaidResults.text = currentShuffledList.drop(2).joinToString(sep)
 
         paymentLockBox.visibility = View.VISIBLE
         tvPaidResults.visibility = View.GONE
